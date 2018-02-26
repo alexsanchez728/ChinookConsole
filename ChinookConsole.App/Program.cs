@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChinookConsole.App.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,39 @@ namespace ChinookConsole.App
     {
         static void Main(string[] args)
         {
+            /* Show user Main Menu with 5 options
+            1. Provide a query that shows the invoices associated with each sales agent. 
+                --The resultant table should include the Sales Agent's full name.
+            2. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices
+            3. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for an Invoice 
+                --with a parameterized Id from user input
+            4. INSERT a new invoice with parameters for customerid and billing address
+            5.UPDATE an Employee's name with a parameter for Employee Id and new name
+            */
+
+            // Given the user wants to see an agents invoices
+            // When the select 1.
+            // Then they should see all Agents by index to select
+
+            var employeeId = Console.ReadLine();
+
+            var agentInvoiceQuery = new AgentInvoiceQuery();
+            var invoices = agentInvoiceQuery.GetInvoiceByEmployeeId(employeeId);
+
+            foreach (var invoice in invoices)
+            {
+                Console.WriteLine($"Sales Agent: {invoice.SalesAgent} --- Invoices Id: {invoice.InvoiceId}");
+            }
+
+
+            // When an agent is selected
+            // Then show that agent's name at the head of the console...
+            // And Then show all invoice information on screen
+
+            // Give the user a return to Agents option
+            // Give the user a return to main menu option
+
+            Console.ReadKey();
         }
     }
 }
