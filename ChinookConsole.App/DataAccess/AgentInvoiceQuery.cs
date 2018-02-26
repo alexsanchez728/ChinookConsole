@@ -22,7 +22,7 @@ namespace ChinookConsole.App.DataAccess
 	                                    From Employee e
                                             join customer c on c.SupportRepId = e.EmployeeId
                                                 join invoice i on i.CustomerId = c.CustomerId
-	                                    where e.Title='Sales Support Agent' OR e.Title='Sales Manager'";
+	                                    where e.Title = 'Sales Support Agent' OR e.Title = 'Sales Manager'";
 
 
                 var reader = cmd.ExecuteReader();
@@ -44,5 +44,38 @@ namespace ChinookConsole.App.DataAccess
                 return invoices;
             }
         }
+
+        public List<Invoice> GetInvoiceData()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = @"select i.Total, e.firstname + ' ' + e.lastname as [Agent], i.BillingCountry, c.FirstName + ' ' + c.LastName as [Customer] 
+                                    from Employee e
+                                        join customer c on c.SupportRepId = e.EmployeeId
+                                            join invoice i on i.CustomerId = c.CustomerId
+                                    where e.title = 'Sales Support Agent' OR e.Title = 'Sales Manager'";
+
+                var reader = cmd.ExecuteReader();
+
+                var invoices = new List<Invoice>();
+
+                while (reader.Read())
+                {
+                    var invoice = new Invoice
+                    {
+                        Total = double.Parse(reader["Total"].ToString()),
+                        SalesAgent = reader["Agent"].ToString(),
+                        BillingCountry = reader["BillingCountry"].ToString(),
+                        CustomerName = reader["Customer"].ToString()
+                    };
+                    invoices.Add(invoice);
+                }
+                return invoices;
+            }
+        }
+
+
     }
 }
