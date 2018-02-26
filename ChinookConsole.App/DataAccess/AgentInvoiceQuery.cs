@@ -51,7 +51,7 @@ namespace ChinookConsole.App.DataAccess
             {
                 connection.Open();
                 var cmd = connection.CreateCommand();
-                cmd.CommandText = @"select i.Total, e.firstname + ' ' + e.lastname as [Agent], i.BillingCountry, c.FirstName + ' ' + c.LastName as [Customer] 
+                cmd.CommandText = @"select i.*, e.firstname + ' ' + e.lastname as [Agent], c.FirstName + ' ' + c.LastName as [Customer] 
                                     from Employee e
                                         join customer c on c.SupportRepId = e.EmployeeId
                                             join invoice i on i.CustomerId = c.CustomerId

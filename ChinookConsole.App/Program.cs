@@ -31,11 +31,30 @@ namespace ChinookConsole.App
                         var employeeId = Console.ReadLine();
 
                         var agentInvoiceQuery = new AgentInvoiceQuery();
-                        var invoices = agentInvoiceQuery.GetInvoiceByEmployeeId(employeeId);
+                        var agentsInvoices = agentInvoiceQuery.GetInvoiceByEmployeeId(employeeId);
 
-                        foreach (var invoice in invoices)
+                        foreach (var invoice in agentsInvoices)
                         {
                             Console.WriteLine($"Sales Agent: {invoice.SalesAgent} --- Invoices Id: {invoice.InvoiceId}");
+                        }
+                        Console.WriteLine("press enter to continue.");
+                        Console.ReadLine();
+                        break;
+
+                    case '2':
+                        Console.Clear();
+
+                        employeeId = Console.ReadLine();
+
+                        var allInvoicesQuery = new AgentInvoiceQuery();
+                        agentsInvoices = allInvoicesQuery.GetInvoiceData();
+
+                        foreach (var invoice in agentsInvoices)
+                        {
+                            Console.WriteLine($"Sales Agent: {invoice.SalesAgent}" +
+                                $" Customer: {invoice.CustomerName}" +
+                                $" Total: {invoice.Total}" +
+                                $" Billing Country: {invoice.BillingCountry}");
                         }
                         Console.WriteLine("press enter to continue.");
                         Console.ReadLine();
@@ -71,8 +90,8 @@ namespace ChinookConsole.App
             cki MainMenu()
             {
                 View mainMenu = new View()
-                        .AddMenuOption("Show invoices by sales agent ID.");
-
+                        .AddMenuOption("Show invoices by sales agent ID.")
+                        .AddMenuOption("Show ALL the invoice data");
                 Console.Write(mainMenu.GetFullMenu());
                 cki userOption = Console.ReadKey();
                 return userOption;
