@@ -24,6 +24,7 @@ namespace ChinookConsole.App
                         break;
 
                     case '1':
+
                         Console.Clear();
                         Console.WriteLine("Enter in an Employee ID # (1-5)");
                         var invoiceQuery = new AgentInvoiceQuery();
@@ -42,6 +43,7 @@ namespace ChinookConsole.App
                         break;
 
                     case '2':
+
                         Console.Clear();
 
                         employeeId = Console.ReadLine();
@@ -61,6 +63,7 @@ namespace ChinookConsole.App
                         break;
 
                     case '3':
+
                         Console.Clear();
 
                         Console.WriteLine("Enter an Invoice ID for how many line items are on that invoice.");
@@ -70,6 +73,35 @@ namespace ChinookConsole.App
                         var countOfLineItems = lineItemsQuery.GetInvoiceLineItems(int.Parse(inputId));
 
                         Console.WriteLine($"For {inputId} there are {countOfLineItems} line items.");
+                        Console.ReadLine();
+                        break;
+
+                    case '4':
+
+                        Console.Clear();
+
+                        Console.WriteLine("Enter Customer ID number.");
+                        var enteredCustomerId = int.Parse(Console.ReadLine());
+
+                        Console.WriteLine("Enter Customer's Billing Address");
+                        var enteredBillingAddress = Console.ReadLine();
+
+                        var invoiceModifier = new InvoiceModifier();
+                        var result = invoiceModifier.AddInvoice(enteredCustomerId, enteredBillingAddress);
+
+                        if (result)
+                            Console.WriteLine("new Invoice Added.");
+
+                        Console.WriteLine("press enter to continue.");
+                        Console.ReadLine();
+                        break;
+
+                    case '5':
+                        Console.Clear();
+
+
+
+                        Console.WriteLine("press enter to continue.");
                         Console.ReadLine();
                         break;
                 }
@@ -91,7 +123,10 @@ namespace ChinookConsole.App
                 View mainMenu = new View()
                         .AddMenuOption("Show invoices by sales agent ID.")
                         .AddMenuOption("Show ALL the invoice data")
-                        .AddMenuOption("Show number of invoice line items for an invoice ID");
+                        .AddMenuOption("Show number of invoice line items for an invoice ID")
+                        .AddMenuOption("Add new invoice item")
+                        .AddMenuOption("Update or change an employee's name.")
+                        .AddMenuText("Press [0] to quit application");
                 Console.Write(mainMenu.GetFullMenu());
                 cki userOption = Console.ReadKey();
                 return userOption;

@@ -76,6 +76,20 @@ namespace ChinookConsole.App.DataAccess
             }
         }
 
+        public int GetLastInvoice()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var cmd = connection.CreateCommand();
+                cmd.CommandText = @"SELECT TOP 1 * FROM invoice ORDER BY InvoiceId DESC";
+
+                connection.Open();
+
+                var lastInvoiceId = (int)cmd.ExecuteScalar();
+
+                return lastInvoiceId;
+            }
+        }
 
     }
 }
