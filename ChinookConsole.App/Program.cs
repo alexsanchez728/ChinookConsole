@@ -59,6 +59,19 @@ namespace ChinookConsole.App
                         Console.WriteLine("press enter to continue.");
                         Console.ReadLine();
                         break;
+
+                    case '3':
+                        Console.Clear();
+
+                        Console.WriteLine("Enter an Invoice ID for how many line items are on that invoice.");
+                        var inputId = Console.ReadLine();
+
+                        var lineItemsQuery = new InvoiceLineItemQuery();
+                        var countOfLineItems = lineItemsQuery.GetInvoiceLineItems(int.Parse(inputId));
+
+                        Console.WriteLine($"For {inputId} there are {countOfLineItems} line items.");
+                        Console.ReadLine();
+                        break;
                 }
 
                 /* Show user Main Menu with 5 options
@@ -70,20 +83,6 @@ namespace ChinookConsole.App
                 4. INSERT a new invoice with parameters for customerid and billing address
                 5.UPDATE an Employee's name with a parameter for Employee Id and new name
                 */
-
-                // Given the user wants to see an agents invoices
-                // When the select 1.
-                // Then they should see all Agents by index to select
-
-
-
-                // When an agent is selected
-                // Then show that agent's name at the head of the console...
-                // And Then show all invoice information on screen
-
-                // Give the user a return to Agents option
-                // Give the user a return to main menu option
-
             }
 
 
@@ -91,7 +90,8 @@ namespace ChinookConsole.App
             {
                 View mainMenu = new View()
                         .AddMenuOption("Show invoices by sales agent ID.")
-                        .AddMenuOption("Show ALL the invoice data");
+                        .AddMenuOption("Show ALL the invoice data")
+                        .AddMenuOption("Show number of invoice line items for an invoice ID");
                 Console.Write(mainMenu.GetFullMenu());
                 cki userOption = Console.ReadKey();
                 return userOption;
