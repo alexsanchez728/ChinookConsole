@@ -25,6 +25,7 @@ namespace ChinookConsole.App
 
                     case '1':
 
+                        Console.Clear();
                         Console.WriteLine("Enter in an Employee ID # (1-5)");
                         var invoiceQuery = new AgentInvoiceQuery();
 
@@ -43,7 +44,7 @@ namespace ChinookConsole.App
 
                     case '2':
 
-                        employeeId = Console.ReadLine();
+                        Console.Clear();
 
                         var allInvoicesQuery = new AgentInvoiceQuery();
                         agentsInvoices = allInvoicesQuery.GetInvoiceData();
@@ -61,6 +62,8 @@ namespace ChinookConsole.App
 
                     case '3':
 
+                        Console.Clear();
+
                         Console.WriteLine("Enter an Invoice ID for how many line items are on that invoice.");
                         var inputId = Console.ReadLine();
 
@@ -73,10 +76,12 @@ namespace ChinookConsole.App
 
                     case '4':
 
-                        Console.WriteLine("Enter Customer ID number.");
+                        Console.Clear();
+
+                        Console.WriteLine("Enter new customer ID number.");
                         var enteredCustomerId = int.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Enter Customer's Billing Address");
+                        Console.WriteLine("Enter new customer's billing address");
                         var enteredBillingAddress = Console.ReadLine();
 
                         var invoiceModifier = new InvoiceModifier();
@@ -90,6 +95,7 @@ namespace ChinookConsole.App
                         break;
 
                     case '5':
+                        Console.Clear();
 
                         Console.WriteLine("Enter the ID of an Emplyee you're wanting to change.");
                         var enteredEmployeeId = int.Parse(Console.ReadLine());
@@ -107,16 +113,6 @@ namespace ChinookConsole.App
                         Console.ReadLine();
                         break;
                 }
-
-                /* Show user Main Menu with 5 options
-                1. Provide a query that shows the invoices associated with each sales agent. 
-                    --The resultant table should include the Sales Agent's full name.
-                2. Provide a query that shows the Invoice Total, Customer name, Country and Sale Agent name for all invoices
-                3. Looking at the InvoiceLine table, provide a query that COUNTs the number of line items for an Invoice 
-                    --with a parameterized Id from user input
-                4. INSERT a new invoice with parameters for customerid and billing address
-                5.UPDATE an Employee's name with a parameter for Employee Id and new name
-                */
             }
 
 
