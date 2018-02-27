@@ -25,7 +25,6 @@ namespace ChinookConsole.App
 
                     case '1':
 
-                        Console.Clear();
                         Console.WriteLine("Enter in an Employee ID # (1-5)");
                         var invoiceQuery = new AgentInvoiceQuery();
 
@@ -38,13 +37,11 @@ namespace ChinookConsole.App
                         {
                             Console.WriteLine($"Sales Agent: {invoice.SalesAgent} --- Invoices Id: {invoice.InvoiceId}");
                         }
-                        Console.WriteLine("press enter to continue.");
+                        Console.WriteLine("Press enter to continue.");
                         Console.ReadLine();
                         break;
 
                     case '2':
-
-                        Console.Clear();
 
                         employeeId = Console.ReadLine();
 
@@ -58,13 +55,11 @@ namespace ChinookConsole.App
                                 $" Total: {invoice.Total}" +
                                 $" Billing Country: {invoice.BillingCountry}");
                         }
-                        Console.WriteLine("press enter to continue.");
+                        Console.WriteLine("Press enter to continue.");
                         Console.ReadLine();
                         break;
 
                     case '3':
-
-                        Console.Clear();
 
                         Console.WriteLine("Enter an Invoice ID for how many line items are on that invoice.");
                         var inputId = Console.ReadLine();
@@ -78,8 +73,6 @@ namespace ChinookConsole.App
 
                     case '4':
 
-                        Console.Clear();
-
                         Console.WriteLine("Enter Customer ID number.");
                         var enteredCustomerId = int.Parse(Console.ReadLine());
 
@@ -90,16 +83,25 @@ namespace ChinookConsole.App
                         var result = invoiceModifier.AddInvoice(enteredCustomerId, enteredBillingAddress);
 
                         if (result)
-                            Console.WriteLine("new Invoice Added.");
+                            Console.WriteLine("New invoice added.");
 
-                        Console.WriteLine("press enter to continue.");
+                        Console.WriteLine("Press enter to continue.");
                         Console.ReadLine();
                         break;
 
                     case '5':
-                        Console.Clear();
 
+                        Console.WriteLine("Enter the ID of an Emplyee you're wanting to change.");
+                        var enteredEmployeeId = int.Parse(Console.ReadLine());
+                        var employeeModifier = new EmployeeModifier();
 
+                            Console.WriteLine("Enter The new name for this employee");
+
+                            var enteredEmployeeName = Console.ReadLine();
+                            result = employeeModifier.UpdateEmployeeName(enteredEmployeeId, enteredEmployeeName);
+                            
+                            if (result)
+                                Console.WriteLine("Employee updated.");
 
                         Console.WriteLine("press enter to continue.");
                         Console.ReadLine();
